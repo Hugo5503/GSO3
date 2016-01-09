@@ -12,18 +12,20 @@ import fontys.util.NumberDoesntExistException;
 import java.beans.PropertyChangeEvent;
 
 public class Bankiersessie extends UnicastRemoteObject implements
-        IBankiersessie, IRemotePropertyListener {
+        IBankiersessie {
 
     private static final long serialVersionUID = 1L;
     private long laatsteAanroep;
     private int reknr;
     private IBank bank;
+    private BasicPublisher publisher;
 
     public Bankiersessie(int reknr, IBank bank) throws RemoteException {
         laatsteAanroep = System.currentTimeMillis();
         this.reknr = reknr;
         this.bank = bank;
         bank.addListener(this, String.valueOf(reknr)); 
+        publisher = new BasicPublisher(new String[]{"sessie"});
 
     }
 
@@ -74,6 +76,17 @@ public class Bankiersessie extends UnicastRemoteObject implements
     @Override
     public void propertyChange(PropertyChangeEvent evt) throws RemoteException {
         System.out.println("got this: " + reknr + " " + evt.getNewValue());
+        publisher.inform(this, "sessie", null, evt.getNewValue());
+    }
+
+    @Override
+    public void addListener(IRemotePropertyListener listener, String property) throws RemoteException {
+        publisher.addListener(listener, property);
+    }
+
+    @Override
+    public void removeListener(IRemotePropertyListener listener, String property) throws RemoteException {
+        publisher.removeListener(listener, property);
     }
 
 }

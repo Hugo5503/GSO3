@@ -7,7 +7,7 @@ import bank.bankieren.Money;
 import fontys.util.InvalidSessionException;
 import fontys.util.NumberDoesntExistException;
 
-public interface IBankiersessie extends Remote {
+public interface IBankiersessie extends Remote, IRemotePublisher, IRemotePropertyListener {
 	
 	long GELDIGHEIDSDUUR = 600000; 
 	/**

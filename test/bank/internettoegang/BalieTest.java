@@ -49,7 +49,7 @@ public class BalieTest {
      * Test of openRekening method, of class Balie.
      */
     @Test
-    public void testOpenRekeningCorrect() {
+    public void testOpenRekeningCorrect() throws RemoteException {
         String result = balie.openRekening(naam, plaats, wachtwoord);
         int length = result.length();
         
@@ -61,7 +61,7 @@ public class BalieTest {
      * Test of openRekening method with incorrect passwords, of class Balie.
      */
     @Test
-    public void testOpenRekeningIncorrectWachtwoord() {
+    public void testOpenRekeningIncorrectWachtwoord() throws RemoteException {
         String wachtwoordTeKort = "aa";
         String wachtwoordTeLang = "ditIsEchtEenBelachelijkeRequirement";
       
@@ -76,7 +76,7 @@ public class BalieTest {
      * Test of openRekening method with empty inputs, of class Balie.
      */
     @Test
-    public void testOpenRekeningEmptyInput() {
+    public void testOpenRekeningEmptyInput() throws RemoteException {
         String leeg = "";
       
         String wachtwoordLeeg = balie.openRekening(naam, plaats, leeg);

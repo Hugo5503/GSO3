@@ -6,6 +6,7 @@
 package bank.bankieren;
 
 import fontys.util.NumberDoesntExistException;
+import java.rmi.RemoteException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -27,7 +28,7 @@ public class BankTest {
     public BankTest() {
     }
     @Before
-    public void setUp() {
+    public void setUp() throws RemoteException {
         bank = new Bank("ING");
         r1 = bank.getRekening(bank.openRekening("ds", "Ds"));
         r2 = bank.getRekening(bank.openRekening("aa", "bb"));

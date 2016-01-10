@@ -67,5 +67,10 @@ public class Balie extends UnicastRemoteObject implements IBalie {
 		return s.toString();
 	}
 
+    @Override
+    public boolean muteer(int destination, Money bedrag) throws RemoteException {
+        return bank.muteer(destination, bedrag);
+    }
+
 
 }

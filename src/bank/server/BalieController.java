@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package bank.server;
 
 import bank.bankieren.Bank;
@@ -33,17 +32,17 @@ import javafx.scene.control.TextArea;
  * @author frankcoenen
  */
 public class BalieController implements Initializable {
-    
+
     @FXML
     private ComboBox<String> cbSelectBank1;
-    
+
     @FXML
     private TextArea taMessage;
-    
-     private BalieServer application;
-     private String bankNaam;
-     
-    public void setApp(BalieServer application){
+
+    private BalieServer application;
+    private String bankNaam;
+
+    public void setApp(BalieServer application) {
         this.application = application;
     }
 
@@ -52,28 +51,33 @@ public class BalieController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        cbSelectBank1.getItems().addAll(FXCollections.observableArrayList("RaboBank", "ING", "SNS", "ABN AMRO", "ASN"));
-        
+
+        cbSelectBank1.getItems().addAll(FXCollections.observableArrayList("RaboBank", "ING", "SNS", "ABN_AMRO", "ASN"));
+
         cbSelectBank1.valueProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue ov, Object t, Object t1) {
-                bankNaam = (String) ov.getValue();
-                if (application.startBalie(bankNaam)) {
-                    taMessage.setText(bankNaam + " bank is online");
-                } else {
-                    taMessage.setText("Connection Failed");
+//                bankNaam = (String) ov.getValue();
+//                if (application.startBalie(bankNaam)) {
+//                    taMessage.setText(bankNaam + " bank is online");
+//                } else {
+//                    taMessage.setText("Connection Failed");
+//                }
+                for (String bank : new String[]{"RaboBank", "ING", "SNS", "ABN_AMRO", "ASN"}) {
+                    System.out.println(bank);
+                    String text = taMessage.getText();
+                    if (application.startBalie(bank)) {
+                        taMessage.setText(text + "\n" + bank + " bank is online");
+                    } else {
+                        taMessage.setText(text + "\n" + bank + " Connection Failed");
+                    }
                 }
             }
         }
         );
-    }  
-    
-    
-    
+    }
 
     @FXML
     private void selectBank(ActionEvent event) {
     }
 }
-   

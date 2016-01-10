@@ -53,6 +53,16 @@ public interface IBank extends IRemotePublisher {
      * @return de naam van deze bank
      */
     String getName() throws RemoteException;
+
+    /**
+     *  voegt het bedrag aan de bestemming toe. 
+     * 
+     * @param destination
+     * @param bedrag
+     * @return
+     * @throws RemoteException 
+     */
+    public boolean muteer(int destination, Money bedrag) throws RemoteException;
     
     
 }

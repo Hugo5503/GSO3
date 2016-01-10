@@ -43,7 +43,7 @@ public class BankTest {
      * Test correct usage of openRekening method, of class Bank.
      */
     @Test
-    public void testOpenRekeningMetCorrectGegevens() {
+    public void testOpenRekeningMetCorrectGegevens() throws RemoteException {
         String name = "joep";
         String city = "Eindhoven";
         Bank instance = bank;
@@ -56,7 +56,7 @@ public class BankTest {
      * Test incorrect usage of openRekening method, of class Bank.
      */
     @Test
-    public void testOpenRekeningMetLegeInvoerVelden() {
+    public void testOpenRekeningMetLegeInvoerVelden() throws RemoteException {
         String name = "";
         String city = "";
         Bank instance = bank;
@@ -69,7 +69,7 @@ public class BankTest {
      * Test incorrect usage of name field, of openRekening method, of class Bank.
      */
     @Test
-    public void testOpenRekeningMetLegeNameInvoerVeld() {
+    public void testOpenRekeningMetLegeNameInvoerVeld() throws RemoteException {
         String name = "";
         String city = "Eindhoven";
         Bank instance = bank;
@@ -82,7 +82,7 @@ public class BankTest {
      * Test incorrect usage of name field, of openRekening method, of class Bank.
      */
     @Test
-    public void testOpenRekeningMetLegeCityInvoerVeld() {
+    public void testOpenRekeningMetLegeCityInvoerVeld() throws RemoteException {
         String name = "Joep";
         String city = "";
         Bank instance = bank;
@@ -98,7 +98,7 @@ public class BankTest {
      * created Rekening.
      */
     @Test
-    public void testGetRekeningMetBestaandeRekening() {
+    public void testGetRekeningMetBestaandeRekening() throws RemoteException {
         Bank instance = bank;
         int rekeningNr = bank.openRekening("test", "test");
         IRekening result = instance.getRekening(rekeningNr);
@@ -109,7 +109,7 @@ public class BankTest {
      * Test incorrect usage of getRekening method, of class Bank.
      */
     @Test
-    public void testGetRekeningMetOnbekendeRekening() {
+    public void testGetRekeningMetOnbekendeRekening() throws RemoteException {
         Bank instance = bank;
         bank.openRekening("test", "test");
         IRekening result = instance.getRekening(1);
@@ -155,7 +155,7 @@ public class BankTest {
      * @throws fontys.util.NumberDoesntExistException
      */
     @Test(expected = RuntimeException.class)
-    public void testMaakOverBestemmingGelijkAanBron() throws NumberDoesntExistException {
+    public void testMaakOverBestemmingGelijkAanBron() throws NumberDoesntExistException, RemoteException {
         Bank instance = bank;
         
         int source = r1.getNr();
@@ -170,7 +170,7 @@ public class BankTest {
      * @throws fontys.util.NumberDoesntExistException
      */
     @Test(expected = RuntimeException.class)
-    public void testMaakOverBedragKleinerDanNul() throws NumberDoesntExistException {
+    public void testMaakOverBedragKleinerDanNul() throws NumberDoesntExistException, RemoteException {
         Bank instance = bank;
         Rekening re1 = (Rekening) r1;
         re1.muteer(new Money(1000, EURO));
@@ -187,7 +187,7 @@ public class BankTest {
      * @throws fontys.util.NumberDoesntExistException
      */
     @Test
-    public void testMaakOverSourceTeWeinigGeld() throws NumberDoesntExistException {
+    public void testMaakOverSourceTeWeinigGeld() throws NumberDoesntExistException, RemoteException {
         Bank instance = bank;
         Rekening re1 = (Rekening) r1;
         re1.muteer(new Money(100, EURO));
@@ -205,7 +205,7 @@ public class BankTest {
      * @throws fontys.util.NumberDoesntExistException
      */
     @Test(expected = NumberDoesntExistException.class)
-    public void testMaakOverInvalideSourceRekeningNummer() throws NumberDoesntExistException {
+    public void testMaakOverInvalideSourceRekeningNummer() throws NumberDoesntExistException, RemoteException {
         Bank instance = bank;
         Rekening re1 = (Rekening) r1;
         re1.muteer(new Money(100, EURO));
@@ -223,7 +223,7 @@ public class BankTest {
      * @throws fontys.util.NumberDoesntExistException
      */
     @Test(expected = NumberDoesntExistException.class)
-    public void testMaakOverInvalideDestinationRekeningNummer() throws NumberDoesntExistException {
+    public void testMaakOverInvalideDestinationRekeningNummer() throws NumberDoesntExistException, RemoteException {
         Bank instance = bank;
         Rekening re1 = (Rekening) r1;
         re1.muteer(new Money(100, EURO));
